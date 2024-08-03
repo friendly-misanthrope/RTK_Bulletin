@@ -16,7 +16,9 @@ const AddPostView = () => {
     setPost(prevState => {return {...prevState, [e.target.name]: e.target.value}});
   }
 
-  const savePostOnClick = () => {
+  const savePostOnClick = (e) => {
+    e.preventDefault();
+
     if (title && body) {
       dispatch(
         postAdded({
