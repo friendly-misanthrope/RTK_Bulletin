@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { nanoid } from "@reduxjs/toolkit";
+import { postAdded } from "./postsSlice";
 
 const AddPostView = () => {
   const [post, setPost] = {
@@ -10,6 +13,23 @@ const AddPostView = () => {
 
   const postChangeHandler = (e) => {
     setPost(prevState => {return {...prevState, [e.target.name]: e.target.value}})
+  }
+
+  const savePostOnClick = () => {
+    if (title && body) {
+      dispatch(
+        postAdded({
+          id: nanoid(),
+          title,
+          body
+        })
+      );
+
+      setPost({
+        title: '',
+        body: ''
+      });
+    }
   }
 
   return (
