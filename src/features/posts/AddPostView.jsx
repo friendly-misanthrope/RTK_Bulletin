@@ -12,7 +12,7 @@ const AddPostView = () => {
   const {title, body} = post;
 
   const postChangeHandler = (e) => {
-    setPost(prevState => {return {...prevState, [e.target.name]: e.target.value}})
+    setPost(prevState => {return {...prevState, [e.target.name]: e.target.value}});
   }
 
   const savePostOnClick = () => {
@@ -49,6 +49,8 @@ const AddPostView = () => {
         name="body"
         value={body}
         onChange={postChangeHandler} />
+
+        <button onClick={savePostOnClick}>Save Post</button>
       </form>
     </section>
   );
