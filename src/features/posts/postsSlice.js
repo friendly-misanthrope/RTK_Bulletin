@@ -50,7 +50,7 @@ const postsSlice = createSlice({
             reactions: {
               thumbsUp: 0,
               wow: 0,
-              hearth: 0,
+              heart: 0,
               rocket: 0,
               coffee: 0
             }
@@ -60,12 +60,14 @@ const postsSlice = createSlice({
     },
     reactionAdded(state, action) {
       const {postId, reaction} = action.payload;
-      const post = state.posts.find(post => post.id === postId);
-      if (post) post.reactions[reaction]++
+      const post = state.find(post => post.id === postId);
+      if (post) {
+        post.reactions[reaction]++
+      }
     }
   }
 });
 
 export const selectAllPosts = (state) => state.posts;
-export const { postAdded } = postsSlice.actions;
+export const { postAdded, reactionAdded } = postsSlice.actions;
 export default postsSlice.reducer;
