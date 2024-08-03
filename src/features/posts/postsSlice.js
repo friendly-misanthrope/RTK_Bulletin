@@ -31,7 +31,7 @@ const postsSlice = createSlice({
             id: nanoid(),
             title,
             body,
-            createdAt: new Date().toISOstring(),
+            createdAt: new Date().toISOString(),
             userId
           }
         }
