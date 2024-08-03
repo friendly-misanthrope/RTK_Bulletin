@@ -4,11 +4,12 @@ import { nanoid } from "@reduxjs/toolkit";
 import { postAdded } from "./postsSlice";
 
 const AddPostView = () => {
-  const [post, setPost] = {
+  const [post, setPost] = useState({
     title: '',
     body: ''
-  }
+  });
 
+  const dispatch = useDispatch();
   const {title, body} = post;
 
   const postChangeHandler = (e) => {
