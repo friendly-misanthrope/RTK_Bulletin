@@ -22,8 +22,6 @@ const AddPostView = () => {
   const savePostOnClick = (e) => {
     e.preventDefault();
 
-  const postIsValid = Boolean(title) && Boolean(body) && Boolean(userId)
-
     if (title && body && userId) {
       dispatch(
         postAdded(title, body, userId)
@@ -36,6 +34,8 @@ const AddPostView = () => {
       });
     }
   }
+
+  const postIsValid = Boolean(title) && Boolean(body) && Boolean(userId)
 
   const usersOptions = users.map((user) => (
     <option key={user.id} value={user.id}>
