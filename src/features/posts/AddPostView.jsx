@@ -21,11 +21,7 @@ const AddPostView = () => {
 
     if (title && body) {
       dispatch(
-        postAdded({
-          id: nanoid(),
-          title,
-          body
-        })
+        postAdded(title, body)
       );
 
       setPost({
