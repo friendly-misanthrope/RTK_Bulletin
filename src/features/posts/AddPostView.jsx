@@ -22,9 +22,16 @@ const AddPostView = () => {
         name="title"
         value={title}
         onChange={postChangeHandler} />
+
+        <label htmlFor="body">Post Content: </label>
+        <input type="text"
+        id="body"
+        name="body"
+        value={body}
+        onChange={postChangeHandler} />
       </form>
     </section>
-  )
+  );
 }
 
 export default AddPostView;
