@@ -1,12 +1,21 @@
-import { useSelector } from "react-redux";
-import { selectAllPosts } from "./postsSlice";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { selectAllPosts, fetchPosts, getPostsStatus, getPostsError } from "./postsSlice";
 import PostAuthorView from "./PostAuthorView";
 import CreatedAt from "./CreatedAt";
 import ReactionsView from "./ReactionsView";
-import React from "react";
 
 const PostsView = () => {
+  const dispatch = useDispatch();
   const posts = useSelector(selectAllPosts);
+  const postsStatus = useSelector(getPostsStatus);
+  const postsError = useSelector(getPostsError);
+
+  useEffect(() => {
+    if (postsStatus === 'idle') {
+      dispatch(fetchPosts());
+    }
+  },[postsStatus, dispatch])
 
   const orderedPosts = posts.slice().sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 
