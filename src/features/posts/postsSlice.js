@@ -10,10 +10,10 @@ const initialState = {
   error: null
 };
 
-export const fetchPosts = createAsyncThunk('posts/fetchPosts', () => {
+export const fetchPosts = createAsyncThunk('posts/fetchPosts', () => (
   axios.get(POSTS_URL)
-    .then((res) => [...res.data]);
-});
+    .then((response) => response.data)
+));
 
 const postsSlice = createSlice({
   name: 'posts',
