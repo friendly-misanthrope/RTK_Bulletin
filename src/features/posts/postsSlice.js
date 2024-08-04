@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { nanoid } from "@reduxjs/toolkit";
-import { sub } from 'date-fns';
+import axios from 'axios';
 
 const initialState = {
   posts: [],
