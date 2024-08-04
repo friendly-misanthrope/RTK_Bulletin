@@ -1,9 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectAllPosts, fetchPosts, getPostsStatus, getPostsError } from "./postsSlice";
-import PostAuthorView from "./PostAuthorView";
-import CreatedAt from "./CreatedAt";
-import ReactionsView from "./ReactionsView";
+import PostsExcerpt from "./PostsExcerpt";
 
 const PostsView = () => {
   const dispatch = useDispatch();
@@ -17,24 +15,24 @@ const PostsView = () => {
     }
   },[postsStatus, dispatch])
 
-  const orderedPosts = posts.slice().sort((a, b) => b.createdAt.localeCompare(a.createdAt));
-
-  const renderedPosts = orderedPosts.map(post => (
-    <article key={post.id}>
-      <h3>{post.title}</h3>
-      <p>{post.body.substring(0, 100)}</p>
-      <p className="postCredit">
-        <PostAuthorView userId={post.userId} />
-        <CreatedAt timestamp={post.createdAt} />
-      </p>
-      <ReactionsView post={post} />
-    </article>
-  ));
+  let content;
+  if (postsStatus === 'loading') {
+    content = <p>Loading...</p>
+  } else if (postsStatus === 'fulfilled') {
+    const orderedPosts = posts.slice().sort((a, b) => {
+      b.createdAt.localeCompare(a.createdAt)
+    });
+    content = orderedPosts.map(post => <PostsExcerpt
+      key={post.id} post={post} />
+    );
+  } else if (postsStatus === 'rejected') {
+    content = <p>{postsError}</p>
+  }
 
   return (
     <section>
       <h2>Posts</h2>
-      {renderedPosts}
+      {content}
     </section>
   )
 }
