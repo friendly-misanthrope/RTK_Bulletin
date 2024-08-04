@@ -11,7 +11,7 @@ const initialState = [
     reactions: {
       thumbsUp: 0,
       wow: 0,
-      hearth: 0,
+      heart: 0,
       rocket: 0,
       coffee: 0
     }
@@ -22,9 +22,9 @@ const initialState = [
     body: "The more I say slice, the more I want pizza.",
     createdAt: sub(new Date(), { minutes: 5 }).toISOString(),
     reactions: {
-      thumbsUp: 0,
+      thumbsUp: Number(0),
       wow: 0,
-      hearth: 0,
+      heart: 0,
       rocket: 0,
       coffee: 0
     }
