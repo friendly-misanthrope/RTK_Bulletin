@@ -10,7 +10,7 @@ const CreatedAt = ({timestamp}) => {
 
   }
   return (
-    <span title = {timestamp}>
+    <span title = {parseISO(timestamp)}>
       &nbsp; <i>{timeAgo}</i>
     </span>
   )
