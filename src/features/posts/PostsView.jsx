@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { BallTriangle } from "react-loader-spinner";
-import PostsExcerpt from "./PostsExcerpt";
+import PostsExcerpt from "./PostsExcerptView";
 import {
   selectAllPosts,
   fetchPosts,

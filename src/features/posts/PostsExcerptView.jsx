@@ -1,5 +1,5 @@
 import PostAuthorView from "./PostAuthorView";
-import CreatedAt from "./CreatedAt";
+import CreatedAt from "./CreatedAtView";
 import ReactionsView from "./ReactionsView";
 
 const PostsExcerpt = ({ post }) => {
