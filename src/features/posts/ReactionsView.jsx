@@ -15,7 +15,7 @@ const ReactionsView = ({ post }) => {
   
   const reactionButtons = Object.entries(reactionEmoji).map(([name, emoji]) => {
     
-    const addReaction = (e) => {
+    const addReaction = () => {
       dispatch(reactionAdded({ postId: post.id, reaction: name }))
     }
 
