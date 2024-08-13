@@ -6,7 +6,12 @@ const PostsExcerpt = ({ post }) => {
   return (
     <article>
       <h3>{post.title}</h3>
-      <p>{post.body.substring(0, 100)}</p>
+      {
+        post.body.length > 50 ?
+        <p>{post.body.substring(0, 50)}...</p>
+          : <p>{post.body}</p>
+      }
+      
       <p className="postCredit">
         <PostAuthorView userId={post.userId} />
         <CreatedAt timestamp={post.createdAt} />
