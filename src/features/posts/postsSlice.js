@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { nanoid } from "@reduxjs/toolkit";
 import { sub } from 'date-fns';
 import axios from 'axios';
-const POSTS_URL = 'https://jsonplaceholder.typicode.com/posts'
+const POSTS_URL = 'https://jsonplaceholder.typicode.com/posts';
 
 const initialState = {
   posts: [],
@@ -10,8 +10,8 @@ const initialState = {
   error: null
 };
 
-export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => (
-  await axios.get(POSTS_URL)
+export const fetchPosts = createAsyncThunk('posts/fetchPosts', () => (
+  axios.get(POSTS_URL)
     .then((response) => response.data)
 ));
 
@@ -46,18 +46,17 @@ const postsSlice = createSlice({
       const {postId, reaction} = action.payload;
       const post = state.posts.find(post => post.id === postId);
       if (post) {
-        post.reactions[reaction]++
+        post.reactions[reaction]++;
       }
     }
   },
   extraReducers(builder) {
     builder
-      .addCase(fetchPosts.pending, (state, action) => {
+      .addCase(fetchPosts.pending, (state) => {
         state.status = 'pending';
       })
       .addCase(fetchPosts.fulfilled, (state, action) => {
-        state.status = 'fulfilled'
-        let min = 1;
+        state.status = 'fulfilled';
         const posts = action.payload.map(post => {
           post.createdAt = sub(new Date(), { minutes: Math.random() * 500 }).toISOString();
           post.reactions = {
@@ -67,13 +66,13 @@ const postsSlice = createSlice({
             rocket: 0,
             coffee: 0
           }
-          return post
+          return post;
         });
         state.posts = state.posts.concat(posts);
       })
       .addCase(fetchPosts.rejected, (state, action) => {
         state.status = 'rejected';
-        state.error = action.error.message
+        state.error = action.error.message;
       });
   } 
 });
