@@ -4,22 +4,9 @@ import { nanoid } from "@reduxjs/toolkit";
 
 const USERS_URL = 'https://jsonplaceholder.typicode.com/users'
 
-const initialState = [
-  {
-    id: 201,
-    name: "Dude Lebowski",
-  },
-  {
-    id: 202,
-    name: "Neil Young"
-  },
-  {
-    id: 203,
-    name: "King Leonidas"
-  }
-];
+const initialState = [];
 
-const fetchUsers = createAsyncThunk('users/fetchUsers', () => (
+export const fetchUsers = createAsyncThunk('users/fetchUsers', () => (
   axios.get(USERS_URL)
     .then((response) => response.data)
 ));
@@ -30,7 +17,7 @@ const usersSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder.addCase(fetchUsers.fulfilled, (state, action) => (
-      [...state, action.payload]
+      action.payload
     ));
   }
 });

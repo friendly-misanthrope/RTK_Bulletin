@@ -37,14 +37,13 @@ const PostsView = () => {
         color="#61dbfb" />
       </div>
     </>;
-    // Posts content if fetch successful
+    // Render post content if fetch successful
   } else if (postsStatus === "fulfilled") {
-    const orderedPosts = posts.slice().sort((a, b) => {
-      b.createdAt.localeCompare(a.createdAt);
-    });
+    const orderedPosts = posts.slice()
+      .sort((a, b) => b.createdAt.localeCompare(a.createdAt))
     content = orderedPosts.map((post) => (
       <PostsExcerpt key={post.id} post={post} />
-    ));
+    ))
     // PostsView content if fetch not successful
   } else if (postsStatus === "rejected") {
     content = <p>{postsError}</p>;

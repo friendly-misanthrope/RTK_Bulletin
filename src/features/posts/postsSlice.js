@@ -10,8 +10,8 @@ const initialState = {
   error: null
 };
 
-export const fetchPosts = createAsyncThunk('posts/fetchPosts', () => (
-  axios.get(POSTS_URL)
+export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => (
+  await axios.get(POSTS_URL)
     .then((response) => response.data)
 ));
 
@@ -59,7 +59,7 @@ const postsSlice = createSlice({
         state.status = 'fulfilled'
         let min = 1;
         const posts = action.payload.map(post => {
-          post.createdAt = sub(new Date(), { minutes: min++ }).toISOString();
+          post.createdAt = sub(new Date(), { minutes: Math.random() * 500 }).toISOString();
           post.reactions = {
             thumbsUp: 0,
             wow: 0,
