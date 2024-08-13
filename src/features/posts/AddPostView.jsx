@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { postAdded } from "./postsSlice";
+import { addPost } from "./postsSlice";
 import { selectAllUsers } from "../users/usersSlice";
 
 const AddPostView = () => {
@@ -9,6 +9,8 @@ const AddPostView = () => {
     body: '',
     userId: ''
   });
+
+  const [postReqStatus, setPostReqStatus] = useState('idle');
 
   const users = useSelector(selectAllUsers);
 
@@ -19,23 +21,27 @@ const AddPostView = () => {
     setPost(prevState => {return {...prevState, [e.target.name]: e.target.value}});
   }
 
+  const postIsValid = [title, body, userId].every(Boolean) && postReqStatus === 'idle';
+
   const savePostOnClick = (e) => {
     e.preventDefault();
 
-    if (title && body && userId) {
-      dispatch(
-        postAdded(title, body, userId)
-      );
-
-      setPost({
-        title: '',
-        body: '',
-        userId: ''
-      });
+    if (postIsValid) {
+      try {
+        setPostReqStatus('pending');
+        dispatch(addPost({title, body, userId})).unwrap();
+        setPost({
+          title: '',
+          body: '',
+          userId: ''
+        });
+      } catch(e) {
+        console.error('Unable to save post', e);
+      } finally {
+        setPostReqStatus('idle');
+      }
     }
   }
-
-  const postIsValid = Boolean(title) && Boolean(body) && Boolean(userId)
 
   const usersOptions = users.map((user) => (
     <option key={user.id} value={user.id}>

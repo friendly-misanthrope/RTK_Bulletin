@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { nanoid } from "@reduxjs/toolkit";
+// import { nanoid } from "@reduxjs/toolkit";
 import { sub } from 'date-fns';
 import axios from 'axios';
 const POSTS_URL = 'https://jsonplaceholder.typicode.com/posts';
@@ -15,8 +15,8 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', () => (
     .then((response) => response.data)
 ));
 
-export const addPost = createAsyncThunk('posts/addPost', () => (
-  axios.post(POSTS_URL)
+export const addPost = createAsyncThunk('posts/addPost', (newPost) => (
+  axios.post(POSTS_URL, newPost)
     .then((response) => response.data)
 ));
 
@@ -24,29 +24,29 @@ const postsSlice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
-    postAdded: {
-      reducer(state, action) {
-        state.posts.push(action.payload);
-      },
-      prepare(title, body, userId) {
-        return {
-          payload: {
-            id: nanoid(),
-            title,
-            body,
-            createdAt: new Date().toISOString(),
-            userId,
-            reactions: {
-              thumbsUp: 0,
-              wow: 0,
-              heart: 0,
-              rocket: 0,
-              coffee: 0
-            }
-          }
-        }
-      }
-    },
+    // postAdded: {
+    //   reducer(state, action) {
+    //     state.posts.push(action.payload);
+    //   },
+    //   prepare(title, body, userId) {
+    //     return {
+    //       payload: {
+    //         id: nanoid(),
+    //         title,
+    //         body,
+    //         createdAt: new Date().toISOString(),
+    //         userId,
+    //         reactions: {
+    //           thumbsUp: 0,
+    //           wow: 0,
+    //           heart: 0,
+    //           rocket: 0,
+    //           coffee: 0
+    //         }
+    //       }
+    //     }
+    //   }
+    // },
     reactionAdded(state, action) {
       const {postId, reaction} = action.payload;
       const post = state.posts.find(post => post.id === postId);
