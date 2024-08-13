@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
-import { nanoid } from "@reduxjs/toolkit";
 
 const USERS_URL = 'https://jsonplaceholder.typicode.com/users'
 
@@ -16,9 +15,8 @@ const usersSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers(builder) {
-    builder.addCase(fetchUsers.fulfilled, (state, action) => (
-      action.payload
-    ));
+    builder.addCase(fetchUsers.fulfilled, (state, action) => 
+      (action.payload));
   }
 });
 
