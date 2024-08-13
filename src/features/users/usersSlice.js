@@ -15,6 +15,10 @@ const initialState = [
   {
     id: 13,
     name: "King Leonidas"
+  },
+  {
+    id: 14,
+    name: "John Prine"
   }
 ];
 

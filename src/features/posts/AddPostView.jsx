@@ -67,7 +67,8 @@ const AddPostView = () => {
         </select>
 
         <label htmlFor="body">Post Content: </label>
-        <input type="text"
+        <textarea
+        rows="5"
         id="body"
         name="body"
         value={body}
