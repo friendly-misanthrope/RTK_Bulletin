@@ -87,7 +87,7 @@ const postsSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(addPost.fulfilled, (state, action) => {
-        action.payload.id = state.posts.length + 1
+        action.payload.id = state.posts.length + 1;
         action.payload.userId = Number(action.payload.userId);
         action.payload.createdAt = new Date().toISOString();
         action.payload.reactions = {
